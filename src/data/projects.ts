@@ -32,6 +32,7 @@ export const PROFILE = {
   location: 'Shanghai, China',
   tagline: 'Building local-first developer tools, Apple apps, and reproducible AI workflows.',
   githubUrl: 'https://github.com/Popcornnnnnnnn',
+  linkedinUrl: 'https://www.linkedin.com/in/weizhi-wang-dev/',
   briefUrl: 'https://brief.popcornnn.xyz/',
   briefFeedUrl: 'https://brief.popcornnn.xyz/feed.json',
   earprintUrl: 'https://earprint.popcornnn.xyz/',
