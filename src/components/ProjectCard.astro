@@ -1,0 +1,38 @@
+---
+import type { FlagshipProject } from '../data/projects';
+
+interface Props {
+  project: FlagshipProject;
+}
+
+const { project } = Astro.props;
+const metaTag = [project.stack, project.version, project.license].filter(Boolean).join(' · ');
+---
+
+<article class="project-card">
+  <header>
+    <div class="card-meta-row">
+      <span class="card-badge" data-accent={project.accent}>{project.platform}</span>
+      <span>{metaTag}</span>
+    </div>
+    <h3 class="project-title">
+      <a class="card-link" href={project.primaryUrl} target="_blank" rel="noopener noreferrer">
+        {project.name}
+      </a>
+    </h3>
+    <p class="project-tagline">{project.tagline}</p>
+  </header>
+
+  <p class="project-desc">{project.description}</p>
+
+  <footer class="card-footer">
+    <span class="card-primary-cue" aria-hidden="true">{project.primaryLabel} &#8599;</span>
+    {project.secondaryUrl && project.secondaryLabel && (
+      <div class="card-secondary-links">
+        <a href={project.secondaryUrl} target="_blank" rel="noopener noreferrer">
+          {project.secondaryLabel} &#8599;
+        </a>
+      </div>
+    )}
+  </footer>
+</article>

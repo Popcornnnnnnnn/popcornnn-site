@@ -1,0 +1,86 @@
+---
+import { FALLBACK_BRIEF, PROFILE } from '../data/projects';
+---
+
+<section class="dispatch-section" aria-labelledby="dispatch-heading">
+  <article class="dispatch-card" id="brief-dispatch" data-feed-url={PROFILE.briefFeedUrl}>
+    <div class="dispatch-meta">
+      <span class="dispatch-live">
+        <span class="dispatch-live-dot" aria-hidden="true"></span>
+        <span id="brief-status">Daily Brief · Live Wire</span>
+      </span>
+      <time id="brief-date" datetime={FALLBACK_BRIEF.date}>{FALLBACK_BRIEF.date}</time>
+    </div>
+
+    <h2 class="dispatch-title" id="dispatch-heading">
+      <a id="brief-title-link" href={FALLBACK_BRIEF.url} target="_blank" rel="noopener noreferrer">
+        {FALLBACK_BRIEF.title}
+      </a>
+    </h2>
+
+    <p class="dispatch-summary" id="brief-summary">{FALLBACK_BRIEF.summary}</p>
+
+    <div class="dispatch-links">
+      <a id="brief-read-link" href={FALLBACK_BRIEF.url} target="_blank" rel="noopener noreferrer">
+        Open latest issue &#8594;
+      </a>
+      <a href={`${PROFILE.briefUrl}archive/`} target="_blank" rel="noopener noreferrer">Archive</a>
+      <a href={`${PROFILE.briefUrl}rss.xml`} target="_blank" rel="noopener noreferrer">RSS</a>
+      <a href={`${PROFILE.briefUrl}llms.txt`} target="_blank" rel="noopener noreferrer">llms.txt</a>
+    </div>
+  </article>
+</section>
+
+<script>
+  const card = document.getElementById('brief-dispatch');
+  const feedUrl = card?.getAttribute('data-feed-url');
+  const titleLink = document.getElementById('brief-title-link') as HTMLAnchorElement | null;
+  const readLink = document.getElementById('brief-read-link') as HTMLAnchorElement | null;
+  const dateEl = document.getElementById('brief-date') as HTMLTimeElement | null;
+  const summaryEl = document.getElementById('brief-summary');
+  const statusEl = document.getElementById('brief-status');
+
+  if (feedUrl && titleLink && readLink && dateEl && summaryEl) {
+    const hydrateLatestBrief = async () => {
+      try {
+        const res = await fetch(feedUrl, {
+          headers: { Accept: 'application/json' },
+          signal: AbortSignal.timeout(6000),
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        const latest = Array.isArray(data?.items) ? data.items[0] : null;
+        if (!latest || typeof latest.title !== 'string') return;
+
+        const cleanDate =
+          typeof latest.date_published === 'string'
+            ? latest.date_published.slice(0, 10)
+            : dateEl.textContent || '';
+        const cleanUrl =
+          typeof latest.url === 'string' && latest.url.startsWith('https://')
+            ? latest.url
+            : titleLink.href;
+        const cleanSummary =
+          typeof latest.summary === 'string' && latest.summary.trim().length > 0
+            ? latest.summary.trim()
+            : summaryEl.textContent || '';
+
+        titleLink.textContent = latest.title;
+        titleLink.href = cleanUrl;
+        readLink.href = cleanUrl;
+        if (cleanDate) {
+          dateEl.textContent = cleanDate;
+          dateEl.setAttribute('datetime', cleanDate);
+        }
+        summaryEl.textContent = cleanSummary;
+        if (statusEl) {
+          statusEl.textContent = 'Daily Brief · Synced Live';
+        }
+      } catch {
+        /* Keep baked-in fallback quietly */
+      }
+    };
+
+    void hydrateLatestBrief();
+  }
+</script>

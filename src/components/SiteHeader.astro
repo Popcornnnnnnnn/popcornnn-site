@@ -1,0 +1,146 @@
+---
+import { PROFILE } from '../data/projects';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+---
+
+<header class="site-header" id="site-header">
+  <div class="header-inner" id="header-inner">
+    <a class="site-logo" href="/">
+      <span class="logo-dot" aria-hidden="true"></span>
+      <span>popcornnn.xyz</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <button
+        class="menu-button"
+        type="button"
+        popovertarget="site-menu"
+        popovertargetaction="toggle"
+        aria-controls="site-menu"
+      >
+        <svg
+          aria-hidden="true"
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+        >
+          <line x1="2" y1="4.5" x2="14" y2="4.5" />
+          <line x1="2" y1="8" x2="14" y2="8" />
+          <line x1="2" y1="11.5" x2="14" y2="11.5" />
+        </svg>
+        <span>Menu</span>
+      </button>
+
+      <ul id="site-menu" class="site-menu" popover="auto">
+        <li>
+          <a href="/" aria-current={currentPath === '/' ? 'page' : undefined}>Home</a>
+        </li>
+        <li>
+          <a href="#work">Selected Work</a>
+        </li>
+        <li>
+          <a href="#tools">Utilities</a>
+        </li>
+        <li>
+          <a href={PROFILE.briefUrl} target="_blank" rel="noopener noreferrer">Daily Brief</a>
+        </li>
+        <li>
+          <a href={PROFILE.earprintUrl} target="_blank" rel="noopener noreferrer">Earprint</a>
+        </li>
+        <li>
+          <a class="nav-cta" href={PROFILE.githubUrl} target="_blank" rel="noopener noreferrer">
+            GitHub &#8599;
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  if (!Object.hasOwn(HTMLElement.prototype, 'popover')) {
+    void import('@oddbird/popover-polyfill');
+  }
+
+  const header = document.getElementById('site-header');
+  const inner = document.getElementById('header-inner');
+  const menu = document.getElementById('site-menu');
+
+  if (header && inner && menu) {
+    let lastCollapsedWidth = 0;
+
+    const updateNavLayout = () => {
+      const wasWide = header.classList.contains('is-wide');
+      let wasPopoverOpen = false;
+      try {
+        wasPopoverOpen = !wasWide && menu.matches(':popover-open');
+      } catch {
+        wasPopoverOpen = !wasWide && menu.classList.contains(':popover-open');
+      }
+
+      header.classList.add('is-measuring');
+      header.classList.add('is-wide');
+      menu.removeAttribute('popover');
+
+      const fitsInline = inner.scrollWidth <= inner.clientWidth + 1;
+
+      if (fitsInline) {
+        header.classList.add('is-wide');
+        menu.removeAttribute('popover');
+        lastCollapsedWidth = 0;
+      } else {
+        header.classList.remove('is-wide');
+        menu.setAttribute('popover', 'auto');
+        lastCollapsedWidth = header.getBoundingClientRect().width;
+        if (wasPopoverOpen && typeof menu.showPopover === 'function') {
+          try {
+            menu.showPopover();
+          } catch {
+            /* ignore if polyfill deferred */
+          }
+        }
+      }
+
+      requestAnimationFrame(() => {
+        header.classList.remove('is-measuring');
+      });
+    };
+
+    updateNavLayout();
+
+    const observer = new ResizeObserver((entries) => {
+      const isWideNow = header.classList.contains('is-wide');
+      if (!isWideNow) {
+        const currentHeaderWidth = entries[0]?.contentRect.width ?? header.getBoundingClientRect().width;
+        if (currentHeaderWidth <= lastCollapsedWidth) {
+          return;
+        }
+      }
+      updateNavLayout();
+    });
+
+    observer.observe(header);
+    observer.observe(menu);
+
+    menu.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement | null;
+      const anchor = target?.closest('a');
+      if (anchor && !header.classList.contains('is-wide') && typeof menu.hidePopover === 'function') {
+        try {
+          menu.hidePopover();
+        } catch {
+          /* ignore */
+        }
+      }
+    });
+  }
+</script>

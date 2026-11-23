@@ -1,0 +1,172 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import BriefDispatch from '../components/BriefDispatch.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { FLAGSHIP_PROJECTS, PROFILE, UTILITY_TOOLS } from '../data/projects';
+
+const canonicalUrl = new URL('/', Astro.site || 'https://popcornnn.xyz').toString();
+const title = `${PROFILE.name} (@${PROFILE.handle}) — Personal Studio`;
+const description = `${PROFILE.name} — ${PROFILE.tagline} Projects including Daily Brief, Earprint, WordTail, Port Tools, SpecPack, and Personal Skills.`;
+const totalPublicCount = FLAGSHIP_PROJECTS.length + UTILITY_TOOLS.length;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="popcornnn.xyz" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="alternate" type="application/rss+xml" title="Daily Brief RSS" href={`${PROFILE.briefUrl}rss.xml`} />
+    <link rel="alternate" type="application/feed+json" title="Daily Brief JSON Feed" href={`${PROFILE.briefUrl}feed.json`} />
+  </head>
+  <body>
+    <div class="paper-grain" aria-hidden="true"></div>
+
+    <SiteHeader currentPath="/" />
+
+    <main class="studio-shell">
+      <section class="masthead" aria-labelledby="hero-heading">
+        <p class="kicker">Shanghai &middot; Independent Software Studio</p>
+        <h1 class="hero-title" id="hero-heading">{PROFILE.name}</h1>
+        <p class="hero-lead">
+          {PROFILE.tagline} Exploring fast local software across Swift, Go, Python, and the web under{' '}
+          <a
+            href={PROFILE.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline decoration-[var(--rule-strong)] underline-offset-4 hover:text-[var(--vermilion)]"
+          >
+            @{PROFILE.handle}
+          </a>
+          .
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn-primary" href={PROFILE.githubUrl} target="_blank" rel="noopener noreferrer">
+            Explore GitHub &#8599;
+          </a>
+          <a class="btn-secondary" href={PROFILE.briefUrl} target="_blank" rel="noopener noreferrer">
+            Daily Brief &#8599;
+          </a>
+          <a class="btn-secondary" href={PROFILE.earprintUrl} target="_blank" rel="noopener noreferrer">
+            Earprint iOS &#8599;
+          </a>
+        </div>
+
+        <div class="telemetry-strip">
+          <div class="telemetry-items">
+            <span><strong>{totalPublicCount}</strong> Public Projects</span>
+            <span><strong>Local-First</strong> Architecture</span>
+            <span><strong>Zero</strong> Trackers</span>
+          </div>
+          <span>popcornnn.xyz</span>
+        </div>
+      </section>
+
+      <BriefDispatch />
+
+      <section class="section-block" id="work" aria-labelledby="work-heading">
+        <div class="section-header">
+          <h2 class="section-title" id="work-heading">Selected Work</h2>
+          <span class="section-note">Flagship Apps, Specs &amp; Publications</span>
+        </div>
+
+        <div class="projects-grid">
+          {FLAGSHIP_PROJECTS.map((project) => <ProjectCard project={project} />)}
+        </div>
+      </section>
+
+      <section class="section-block" id="tools" aria-labelledby="tools-heading">
+        <div class="section-header">
+          <h2 class="section-title" id="tools-heading">CLI &amp; System Utilities</h2>
+          <span class="section-note">Open-Source Tools &amp; Homebrew Tap</span>
+        </div>
+
+        <ul class="ledger-list">
+          {
+            UTILITY_TOOLS.map((tool) => (
+              <li class="ledger-item">
+                <div>
+                  <div class="ledger-name">
+                    <a href={tool.repoUrl} target="_blank" rel="noopener noreferrer">
+                      {tool.name}
+                    </a>
+                  </div>
+                  <div class="ledger-kind">
+                    {[tool.kind, tool.version, tool.license].filter(Boolean).join(' · ')}
+                  </div>
+                </div>
+
+                <p class="ledger-summary">{tool.summary}</p>
+
+                <div class="ledger-actions">
+                  {tool.installCmd && (
+                    <button
+                      type="button"
+                      class="copy-cmd-btn"
+                      data-copy={tool.installCmd}
+                      aria-label={`Copy command ${tool.installCmd}`}
+                    >
+                      <span>{tool.installCmd}</span>
+                    </button>
+                  )}
+                  <a class="repo-pill-link" href={tool.repoUrl} target="_blank" rel="noopener noreferrer">
+                    Repo &#8599;
+                  </a>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </main>
+
+    <footer class="studio-shell site-footer">
+      <span>{PROFILE.name} &middot; @{PROFILE.handle} &middot; {PROFILE.location}</span>
+      <nav class="footer-links" aria-label="Footer">
+        <a href={PROFILE.githubUrl} target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href={PROFILE.briefUrl} target="_blank" rel="noopener noreferrer">Daily Brief</a>
+        <a href={PROFILE.earprintUrl} target="_blank" rel="noopener noreferrer">Earprint</a>
+        <a href="/sitemap-index.xml">Sitemap</a>
+      </nav>
+    </footer>
+
+    <script>
+      document.querySelectorAll<HTMLButtonElement>('.copy-cmd-btn').forEach((btn) => {
+        const label = btn.querySelector('span');
+        const original = btn.getAttribute('data-copy') || '';
+        let timer: number | undefined;
+
+        btn.addEventListener('click', async () => {
+          if (!original || !label) return;
+          try {
+            await navigator.clipboard.writeText(original);
+            label.textContent = 'Copied command';
+            if (timer) window.clearTimeout(timer);
+            timer = window.setTimeout(() => {
+              label.textContent = original;
+            }, 1600);
+          } catch {
+            /* Clipboard unavailable in restricted context */
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
