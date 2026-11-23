@@ -36,6 +36,7 @@ export const PROFILE = {
   briefUrl: 'https://brief.popcornnn.xyz/',
   briefFeedUrl: 'https://brief.popcornnn.xyz/feed.json',
   earprintUrl: 'https://earprint.popcornnn.xyz/',
+  watchpostUrl: 'https://watchpost.popcornnn.xyz/',
 };
 
 export const FALLBACK_BRIEF = {
@@ -77,6 +78,23 @@ export const FLAGSHIP_PROJECTS: FlagshipProject[] = [
     secondaryUrl: 'https://github.com/Popcornnnnnnnn/earprint',
     secondaryLabel: 'Source',
     accent: 'cobalt',
+  },
+  {
+    id: 'watchpost',
+    name: 'Watchpost',
+    tagline: 'Headless local background bridge for your coding agent',
+    description:
+      'Local-first background bridge for AI coding agents featuring draft-first triage, Quiet Hours, cross-channel SQLite memory, and 15+ native platforms.',
+    platform: 'Daemon · CLI',
+    stack: 'Python + SQLite',
+    version: 'v0.3.0',
+    license: 'Apache-2.0',
+    primaryUrl: 'https://watchpost.popcornnn.xyz/',
+    primaryLabel: 'Visit microsite',
+    repoUrl: 'https://github.com/Popcornnnnnnnn/watchpost',
+    secondaryUrl: 'https://github.com/Popcornnnnnnnn/watchpost',
+    secondaryLabel: 'Source',
+    accent: 'sage',
   },
   {
     id: 'word-tail',

@@ -7,7 +7,7 @@ import { FLAGSHIP_PROJECTS, PROFILE, UTILITY_TOOLS } from '../data/projects';
 
 const canonicalUrl = new URL('/', Astro.site || 'https://popcornnn.xyz').toString();
 const title = `${PROFILE.name} (@${PROFILE.handle}) — Personal Studio`;
-const description = `${PROFILE.name} — ${PROFILE.tagline} Projects including Daily Brief, Earprint, WordTail, Port Tools, SpecPack, and Personal Skills.`;
+const description = `${PROFILE.name} — ${PROFILE.tagline} Projects including Daily Brief, Earprint, Watchpost, WordTail, Port Tools, SpecPack, and Personal Skills.`;
 const totalPublicCount = FLAGSHIP_PROJECTS.length + UTILITY_TOOLS.length;
 ---
 
@@ -69,6 +69,9 @@ const totalPublicCount = FLAGSHIP_PROJECTS.length + UTILITY_TOOLS.length;
           </a>
           <a class="btn-secondary" href={PROFILE.earprintUrl} target="_blank" rel="noopener noreferrer">
             Earprint iOS &#8599;
+          </a>
+          <a class="btn-secondary" href={PROFILE.watchpostUrl} target="_blank" rel="noopener noreferrer">
+            Watchpost &#8599;
           </a>
         </div>
 
@@ -147,6 +150,7 @@ const totalPublicCount = FLAGSHIP_PROJECTS.length + UTILITY_TOOLS.length;
         <a href={PROFILE.linkedinUrl} target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href={PROFILE.briefUrl} target="_blank" rel="noopener noreferrer">Daily Brief</a>
         <a href={PROFILE.earprintUrl} target="_blank" rel="noopener noreferrer">Earprint</a>
+        <a href={PROFILE.watchpostUrl} target="_blank" rel="noopener noreferrer">Watchpost</a>
         <a href="/sitemap-index.xml">Sitemap</a>
       </nav>
     </footer>
