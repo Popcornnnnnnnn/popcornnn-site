@@ -69,7 +69,7 @@ export const FLAGSHIP_PROJECTS: FlagshipProject[] = [
     name: 'Earprint',
     tagline: '3D collectible headphone cards from Apple Health',
     description:
-      '100% on-device iOS app turning Apple Health audio exposure history into interactive 3D cards, a graded Device Dossier, and 28-day listening rings.',
+      '100% on-device iOS app turning Apple Health listening history for all Bluetooth headphones into interactive 3D cards, 2026 Wrapped reels, Live Activities, and 28-day rings.',
     platform: 'iOS · 18+',
     stack: 'SwiftUI + RealityKit',
     primaryUrl: 'https://earprint.popcornnn.xyz/',
@@ -99,12 +99,12 @@ export const FLAGSHIP_PROJECTS: FlagshipProject[] = [
   {
     id: 'word-tail',
     name: 'WordTail',
-    tagline: 'Zero-LLM inline ghost-text autocomplete for macOS',
+    tagline: 'Zero-LLM inline ghost-text autocomplete & Studio for macOS',
     description:
-      'Instant native macOS typing completion using a compact local vocabulary and user corpus with zero cloud inference, latency, or telemetry.',
+      'Instant native macOS typing completion with 6 domain vocabulary packs, parameterized snippets, per-app profiles, bilingual CJK–English smart spacing, and Typing Wrapped.',
     platform: 'macOS',
     stack: 'Swift',
-    version: 'v0.8.2',
+    version: 'v0.9.0',
     license: 'MIT',
     primaryUrl: 'https://github.com/Popcornnnnnnnn/word-tail',
     primaryLabel: 'View on GitHub',
