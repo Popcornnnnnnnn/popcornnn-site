@@ -37,6 +37,7 @@ export const PROFILE = {
   briefFeedUrl: 'https://brief.popcornnn.xyz/feed.json',
   earprintUrl: 'https://earprint.popcornnn.xyz/',
   watchpostUrl: 'https://watchpost.popcornnn.xyz/',
+  phone3dUrl: 'https://phone3d.popcornnn.xyz/',
 };
 
 export const FALLBACK_BRIEF = {
@@ -95,6 +96,21 @@ export const FLAGSHIP_PROJECTS: FlagshipProject[] = [
     secondaryUrl: 'https://github.com/Popcornnnnnnnn/watchpost',
     secondaryLabel: 'Source',
     accent: 'sage',
+  },
+  {
+    id: 'phone-3d-ui-studio',
+    name: 'Phone 3D UI Studio',
+    tagline: 'Zero-install 3D iPhone UI showcase & Elastic Tray playground',
+    description:
+      'Browser-playable 120 Hz Rapier physics playground and interactive 3D iPhone UI showcase — play solo on mobile, scan a QR code to pair over WebRTC, or use local ARKit 6DoF.',
+    platform: 'Web · 3D',
+    stack: 'Three.js + Rapier',
+    primaryUrl: 'https://phone3d.popcornnn.xyz/',
+    primaryLabel: 'Play online',
+    repoUrl: 'https://github.com/Popcornnnnnnnn/phone-3d-ui-studio',
+    secondaryUrl: 'https://github.com/Popcornnnnnnnn/phone-3d-ui-studio',
+    secondaryLabel: 'Source',
+    accent: 'amber',
   },
   {
     id: 'word-tail',
