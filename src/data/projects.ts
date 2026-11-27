@@ -23,6 +23,7 @@ export interface UtilityTool {
   version?: string;
   license?: string;
   installCmd?: string;
+  websiteUrl?: string;
   repoUrl: string;
 }
 
@@ -39,6 +40,7 @@ export const PROFILE = {
   watchpostUrl: 'https://watchpost.popcornnn.xyz/',
   phone3dUrl: 'https://phone3d.popcornnn.xyz/',
   portToolsUrl: 'https://port-tools.popcornnn.xyz/',
+  linkgetUrl: 'https://linkget.popcornnn.xyz/',
 };
 
 export const FALLBACK_BRIEF = {
@@ -194,6 +196,7 @@ export const UTILITY_TOOLS: UtilityTool[] = [
     summary: 'Save social photos, Live Photos, videos, and X/web articles to macOS Photos or Markdown folders via CLI, Raycast, or MCP.',
     version: 'v0.4.0',
     installCmd: 'brew install Popcornnnnnnnn/tap/linkget',
+    websiteUrl: 'https://linkget.popcornnn.xyz/',
     repoUrl: 'https://github.com/Popcornnnnnnnn/linkget',
   },
   {

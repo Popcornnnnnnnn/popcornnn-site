@@ -110,7 +110,7 @@ const totalPublicCount = FLAGSHIP_PROJECTS.length + UTILITY_TOOLS.length;
               <li class="ledger-item">
                 <div>
                   <div class="ledger-name">
-                    <a href={tool.repoUrl} target="_blank" rel="noopener noreferrer">
+                    <a href={tool.websiteUrl ?? tool.repoUrl} target="_blank" rel="noopener noreferrer">
                       {tool.name}
                     </a>
                   </div>
@@ -132,6 +132,11 @@ const totalPublicCount = FLAGSHIP_PROJECTS.length + UTILITY_TOOLS.length;
                       <span>{tool.installCmd}</span>
                     </button>
                   )}
+                  {tool.websiteUrl && (
+                    <a class="repo-pill-link" href={tool.websiteUrl} target="_blank" rel="noopener noreferrer">
+                      Website &#8599;
+                    </a>
+                  )}
                   <a class="repo-pill-link" href={tool.repoUrl} target="_blank" rel="noopener noreferrer">
                     Repo &#8599;
                   </a>
@@ -151,6 +156,7 @@ const totalPublicCount = FLAGSHIP_PROJECTS.length + UTILITY_TOOLS.length;
         <a href={PROFILE.briefUrl} target="_blank" rel="noopener noreferrer">Daily Brief</a>
         <a href={PROFILE.earprintUrl} target="_blank" rel="noopener noreferrer">Earprint</a>
         <a href={PROFILE.watchpostUrl} target="_blank" rel="noopener noreferrer">Watchpost</a>
+        <a href={PROFILE.linkgetUrl} target="_blank" rel="noopener noreferrer">Linkget</a>
         <a href="/sitemap-index.xml">Sitemap</a>
       </nav>
     </footer>
