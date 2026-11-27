@@ -189,7 +189,7 @@ export const UTILITY_TOOLS: UtilityTool[] = [
     id: 'linkget',
     name: 'Linkget',
     kind: 'CLI · Python',
-    summary: 'Save images and videos directly from links into macOS Photos or a target directory.',
+    summary: 'Save social photos, Live Photos, videos, and X/web articles to macOS Photos or Markdown folders via CLI, Raycast, or MCP.',
     version: 'v0.4.0',
     installCmd: 'brew install Popcornnnnnnnn/tap/linkget',
     repoUrl: 'https://github.com/Popcornnnnnnnn/linkget',
