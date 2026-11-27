@@ -123,7 +123,7 @@ export const FLAGSHIP_PROJECTS: FlagshipProject[] = [
       'Instant native macOS typing completion with free Studio tools — 6 domain vocabulary packs, reusable fill-in snippets, per-app profiles, bilingual CJK–English smart spacing, and Typing Wrapped.',
     platform: 'macOS',
     stack: 'Swift',
-    version: 'v0.9.2',
+    version: 'v1.0.0',
     license: 'MIT',
     primaryUrl: 'https://github.com/Popcornnnnnnnn/word-tail',
     primaryLabel: 'View on GitHub',
