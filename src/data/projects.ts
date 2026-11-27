@@ -38,7 +38,7 @@ export const PROFILE = {
   earprintUrl: 'https://earprint.popcornnn.xyz/',
   watchpostUrl: 'https://watchpost.popcornnn.xyz/',
   phone3dUrl: 'https://phone3d.popcornnn.xyz/',
-  portToolsUrl: 'https://porttools.popcornnn.xyz/',
+  portToolsUrl: 'https://port-tools.popcornnn.xyz/',
 };
 
 export const FALLBACK_BRIEF = {
@@ -140,7 +140,7 @@ export const FLAGSHIP_PROJECTS: FlagshipProject[] = [
     stack: 'Go + Swift',
     version: 'v1.0.6',
     license: 'MIT',
-    primaryUrl: 'https://porttools.popcornnn.xyz/',
+    primaryUrl: 'https://port-tools.popcornnn.xyz/',
     primaryLabel: 'Visit microsite',
     repoUrl: 'https://github.com/Popcornnnnnnnn/port-tools',
     secondaryUrl: 'https://github.com/Popcornnnnnnnn/port-tools',
